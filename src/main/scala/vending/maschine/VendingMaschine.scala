@@ -24,6 +24,7 @@ class VendingMaschine {
       case "granola" => granolaBar
       case _ => -1
     }
+    println(productQuantity)
     productQuantity > 0
   }
 
@@ -40,8 +41,8 @@ class VendingMaschine {
 
   private def releaseProduct(product: String) = {
     product match {
-      case "chocolate" => chocolateBar - 1
-      case "granola" => granolaBar - 1
+      case "chocolate" => chocolateBar -= 1
+      case "granola" => granolaBar -= 1
     }
   }
 
