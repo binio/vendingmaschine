@@ -9,6 +9,13 @@ class Dog(val name:String = "Unknown")
 //named parameters
 class Coordinate (val lattitude:Double, val longitude:Double)
 
+//apply method
+class Cat(val name:String)
+object Cat {
+  def apply(name: String):Cat =
+  new Cat(name)
+}
+
 //companion object
 
 object Dictionary {
@@ -40,6 +47,14 @@ object Main extends  App {
   val e = new Dog()                  //with Unknown name
   val cord = new Coordinate(lattitude = 12.1, longitude = 10.9)
 
+  //apply
+  val c1 = new Cat("micus")
+  val c2 = Cat("mruczek")
+
+  println(c1.name)
+  println(c2.name)
+
+  //companion object
   val tom = new Robot("Tom 1") { def welcome(n: String) = Dictionary.sentenceA } // we compose new object and its welcome function out of dictionary
   val bob = new Robot("Bob 1") { def welcome(n: String) = Dictionary.sentenceB(n) }
 
