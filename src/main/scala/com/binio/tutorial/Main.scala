@@ -13,7 +13,9 @@ class Coordinate (val lattitude:Double, val longitude:Double)
 class Cat(val name:String)
 object Cat {
   def apply(name: String):Cat =
-  new Cat(name)
+    new Cat(name)
+  def apply(name: String, age: String):Cat =
+    new Cat(name + "-" + age)
 }
 
 //companion object
@@ -50,9 +52,11 @@ object Main extends  App {
   //apply
   val c1 = new Cat("micus")
   val c2 = Cat("mruczek")
+  val c3 = Cat("mruczek", "21")
 
   println(c1.name)
   println(c2.name)
+  println(c3.name)
 
   //companion object
   val tom = new Robot("Tom 1") { def welcome(n: String) = Dictionary.sentenceA } // we compose new object and its welcome function out of dictionary
