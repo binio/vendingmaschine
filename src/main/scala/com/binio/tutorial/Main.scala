@@ -47,11 +47,43 @@ trait Animal {
   def move(x:Int, y:Int)
 }
 
-class Monkey extends Animal {
+trait Cute {
+  def poseForPicture():Unit = println("posing for picture...3..2..1 SNAP") //default impl
+}
+
+class Monkey extends Animal with Cute {
 
   override def eat(food: String): String = "Monkey eats " + food
 
   override def move(x: Int, y: Int): Unit = println(s"Monkey moves to $x and $y")
+
+  override def poseForPicture():Unit = println(" Monkey posing for picture...3..2..1 SNAP") //override default impl
+
+}
+///--------trait can extend class---------
+trait rubbish extends Monkey {
+  override def eat(food: String): String = super.eat(food)
+
+  override def move(x: Int, y: Int): Unit = super.move(x, y)
+
+  override def poseForPicture(): Unit = super.poseForPicture()
+}
+
+object Dupa {}
+
+object Monkey extends Animal {
+  override def eat(food: String): String = ???
+
+  override def move(x: Int, y: Int): Unit = ???
+}
+
+//trait can not extend object
+//trait DupaW extends Dupa {
+//
+//}
+
+class City(val name:String) extends Cute {
+
 }
 
 object Main extends  App {
@@ -60,6 +92,10 @@ object Main extends  App {
   val monkey = new Monkey
   println(monkey.eat("Banana"))
   monkey.move(12,10)
+  monkey.poseForPicture()
+  val city = new City("wejherowo")
+  println(city.name)
+  println(city.poseForPicture())
 
 
   //objects
