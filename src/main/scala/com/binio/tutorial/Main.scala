@@ -40,8 +40,29 @@ object Robot {
   }
 }
 
+//traits
+trait Animal {
+  val sleep = "Zzzz"  //default implemetation provided
+  def eat(food: String): String
+  def move(x:Int, y:Int)
+}
+
+class Monkey extends Animal {
+
+  override def eat(food: String): String = "Monkey eats " + food
+
+  override def move(x: Int, y: Int): Unit = println(s"Monkey moves to $x and $y")
+}
+
 object Main extends  App {
 
+  //traits
+  val monkey = new Monkey
+  println(monkey.eat("Banana"))
+  monkey.move(12,10)
+
+
+  //objects
   val a = new Dragon("Thomas")
   val b = new Dragon("Rob")
   val c = new Dog("Kuba")    //with accesible name
