@@ -14,6 +14,7 @@ object Main extends App{
 
   //1. Class can extend trait
   val city = new City("Wejherowo")
+
   println(city.name)
   println(city.fun())
 
