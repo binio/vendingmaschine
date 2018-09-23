@@ -109,6 +109,8 @@ object Main extends App {
   println(isSorted(Array("Scala", "Exercises"), (x: String, y: String) => x.length > y.length))
 
   //check if elements are the same
+  //(x: Int, y: Int) => x == y) shows that we check if x==y in array
+  //so as for isSorted it would be better to negate expression else if(!same(as(n), as(n+1))) false
   println("The same:" + checkTheSame(Array(7, 5, 3, 1), (x: Int, y: Int) => x == y))
   println("The same:" + checkTheSame(Array(1, 1, 1, 1), (x: Int, y: Int) => x == y))
 
