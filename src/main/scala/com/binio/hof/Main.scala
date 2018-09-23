@@ -63,11 +63,7 @@ object Main extends App {
     @annotation.tailrec
     def go(n: Int): Boolean =
       if (n >= as.length - 1) true
-      else if (ordering(as(n), as(n + 1))) {
-        println("ordering " + ordering(as(n), as(n + 1)))
-
-        false //this false is important
-      }
+      else if (!ordering(as(n), as(n + 1))) false
       else go(n + 1)
 
     go(0)
@@ -83,6 +79,38 @@ object Main extends App {
 
     go(0)
   }
+
+  //partial1, currying example
+  def partial1[A,B,C](a:A, f: (A,B) => C): B => C = {
+    (b:B) => f(a,b)
+  }
+  //I do not understand why is like this
+  def curry[A,B,C](f: (A,B) => C): A => (B => C) = {
+    a => b => f(a,b)
+  }
+
+  //non curried sum function
+  def sumNonCurried(a: Int, b: Int):Int = a + b
+
+  //curried sum function
+  def sumCurried(a: Int):Int => Int = (b:Int) => a + b
+
+  def uncurry[A,B,C](f:A => B => C):(A,B) => C = {
+    (a,b) => f(a)(b)
+  }
+
+  //sum from odersky course
+  def sumOdr(f:Int => Int)(a: Int, b: Int): Int = {
+    if(a > b) 0 else f(a) + sumOdr(f)(a + 1, b)
+  }
+
+
+  //multiplication
+  def mltx(x: Int, y: Int): Int = x * y
+
+  def mltxCurried(x:Int): Int => Int = (y:Int) => x * y
+
+  def mltxCurriedG[A](x: A, f:(A, A) => A): A => Any = (y: A) => f(x,y)
 
 
   println(fib(0))
@@ -104,16 +132,24 @@ object Main extends App {
 
 
   //usage of isSorted function
-  println(isSorted(Array(1, 3, 5, 7, 8), (x: Int, y: Int) => x > y))
-  println(isSorted(Array(7, 5, 3, 1), (x: Int, y: Int) => x < y))
-  println(isSorted(Array("Scala", "Exercises"), (x: String, y: String) => x.length > y.length))
+  println("isSorted: [1, 3, 5, 7, 8] " + isSorted(Array(1, 3, 5, 7, 8), (x: Int, y: Int) => y > x))
+  println("isSorted: [7, 5, 3, 1]" + isSorted(Array(7, 5, 3, 1), (x: Int, y: Int) => y < x))
+  println(isSorted(Array("Scala", "Exercises"), (x: String, y: String) => y.length > x.length))
 
   //check if elements are the same
   //(x: Int, y: Int) => x == y) shows that we check if x==y in array
   //so as for isSorted it would be better to negate expression else if(!same(as(n), as(n+1))) false
   println("The same:" + checkTheSame(Array(7, 5, 3, 1), (x: Int, y: Int) => x == y))
   println("The same:" + checkTheSame(Array(1, 1, 1, 1), (x: Int, y: Int) => x == y))
+  println("The same:" + isSorted(Array(1, 1, 1, 1), (x: Int, y: Int) => x == y)) //name could be more generic
 
+  println("sumNonCurried: " + sumNonCurried(23, 7))
+  println("sumCurried: " + sumCurried(23)(7))
+  println("sumCurried: " + sumCurried(sumCurried(23)(7))(10))
+
+  println("mltx: " + mltx(10,7))
+  println("mltxCurried: " + mltxCurried(10)(7))
+  println("mltxCurriedG: " + mltxCurriedG(10, x * y )(7))
 
 
 }
