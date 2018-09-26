@@ -95,6 +95,8 @@ object Main extends App {
   //curried sum function
   def sumCurried(a: Int):Int => Int = (b:Int) => a + b
 
+  def sumCurriedx(a: Int):Int => Int = (b:Int) => a + b
+
   def uncurry[A,B,C](f:A => B => C):(A,B) => C = {
     (a,b) => f(a)(b)
   }
@@ -110,7 +112,9 @@ object Main extends App {
 
   def mltxCurried(x:Int): Int => Int = (y:Int) => x * y
 
-  def mltxCurriedG[A](x: A, f:(A, A) => A): A => Any = (y: A) => f(x,y)
+  //def mltxCurriedG[A](x: A, f:(A, A) => A): A => A = (y: A) => f(x,y)
+
+  def someFunction(x: Int): Int => Int =  (y:Int) => x + y
 
 
   println(fib(0))
@@ -149,7 +153,13 @@ object Main extends App {
 
   println("mltx: " + mltx(10,7))
   println("mltxCurried: " + mltxCurried(10)(7))
-  println("mltxCurriedG: " + mltxCurriedG(10, x * y )(7))
+  println("someFunction: " + someFunction(10))
+
+  def sumCurriedx(a: Double):Double => Double = (b:Double) => a + (a+b)/b
+  def sumCurriedy(a:(Double, Double) => Double):(Double,Double) => Double = (b:Double, c:Double) => a(b,c)
+
+  sumCurriedx(5.0)(2.0)
+  sumCurriedy((x: Double, y:Double) => (x+(x + y)/y))(5.0,2.0)
 
 
 }
