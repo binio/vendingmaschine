@@ -161,5 +161,7 @@ object Main extends App {
   sumCurriedx(5.0)(2.0)
   sumCurriedy((x: Double, y:Double) => (x+(x + y)/y))(5.0,2.0)
 
+  def compose[A, B, C](f: B => C, g: A => B): A => C = (a:A) => f(g(a))
+
 
 }
