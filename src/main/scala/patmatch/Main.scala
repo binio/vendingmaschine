@@ -29,6 +29,19 @@ object Main extends App{
       case Cons(_,at) => at
     }
 
+    def drop[A](l:List[A], n:Int):List[A] =   {
+      if (n == 0) l
+      else l match {
+        case Nil => Nil
+        case Cons(_,t) => drop(t, n-1)
+      }
+    }
+
+    def dropWhile[A](l:List[A], f:A => Boolean):List[A] =  l match {
+      case Cons(h, t) if(f) => dropWhile(t,f)
+      case _ => l
+
+    }
 
   }
 
@@ -45,6 +58,8 @@ object Main extends App{
   List(1,2,3) match {
     case _ => 42
   }
+
+  List.tail(List(1, 2, 3, 4, 5))
 
   List(1,2,3) match {
     case Cons(h,_) => h
