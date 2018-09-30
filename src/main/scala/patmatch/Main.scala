@@ -24,6 +24,11 @@ object Main extends App{
       if (as.isEmpty) Nil
       else Cons(as.head, apply(as.tail: _*))
 
+    def tail(list: List[Int]):List[Int] = list match {
+      case Nil => sys.error("No elements found")
+      case Cons(_,at) => at
+    }
+
 
   }
 
@@ -36,6 +41,7 @@ object Main extends App{
   }
 
   println(x)
+
   List(1,2,3) match {
     case _ => 42
   }
