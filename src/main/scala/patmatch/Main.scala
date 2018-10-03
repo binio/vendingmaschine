@@ -43,6 +43,12 @@ object Main extends App{
 
     }
 
+    def init[A](l:List[A]):List[A] = l match {
+      case Nil => sys.error("empty collection found")
+      case Cons(_,Nil) => Nil
+      case Cons(h,t) => Cons(h,init(t))
+    }
+
   }
 
   val x = List(1, 2, 3, 4, 5) match {
@@ -60,6 +66,8 @@ object Main extends App{
   }
 
   List.tail(List(1, 2, 3, 4, 5))
+
+  println(List.init(List(1, 2, 3, 4, 5)))
 
   List(1,2,3) match {
     case Cons(h,_) => h
