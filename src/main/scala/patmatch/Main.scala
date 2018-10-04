@@ -43,6 +43,11 @@ object Main extends App{
 
     }
 
+    def dropWhileB[A](as:List[A])(f: A => Boolean) : List[A] = as match {
+      case Cons(h,t) if (f(h)) => dropWhileB(t)(f)
+      case _ => as
+    }
+
     def init[A](l:List[A]):List[A] = l match {
       case Nil => sys.error("empty collection found")
       case Cons(_,Nil) => Nil
