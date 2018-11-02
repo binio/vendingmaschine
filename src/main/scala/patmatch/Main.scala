@@ -54,7 +54,18 @@ object Main extends App{
       case Cons(h,t) => Cons(h,init(t))
     }
 
+
+    def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f)) }
+
+    def length(l: List[A]):Int = {
+      foldRight(l,0)(_,acc) => acc + 1
+    }
+
   }
+
+  println(List.length(List(1,2,3,4,5,6,77)))
 
   val x = List(1, 2, 3, 4, 5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
@@ -86,6 +97,7 @@ object Main extends App{
     case Nil => 42
     case Cons(1,_) => 101
   }
+
 
 
 
