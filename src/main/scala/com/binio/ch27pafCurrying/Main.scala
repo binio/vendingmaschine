@@ -10,5 +10,6 @@ object Main extends App{
   def add15 = add(15)(_)
   println(add15(2))
 
+  def sumCurried(a: Int):Int => Int = (b:Int) => a + b
 
 }
